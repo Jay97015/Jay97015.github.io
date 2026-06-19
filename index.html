@@ -3,114 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jay | Engineering Portfolio</title>
+    <title>Jay | Data Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --bg-color: #030712;
+            --card-bg: rgba(30, 41, 59, 0.7);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent: #38bdf8;
+            --accent-purple: #a78bfa;
         }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
+            /* Soft, modern glowing background mesh */
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
             color: var(--text-main);
             margin: 0;
             padding: 0;
+            min-height: 100vh;
         }
+
         header {
             max-width: 900px;
-            margin: 4rem auto 2rem auto;
+            margin: 5rem auto 3rem auto;
             padding: 0 2rem;
         }
+
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            font-weight: 700;
             margin: 0;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
+            letter-spacing: -0.04em;
+            background: linear-gradient(to right, var(--accent), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         header p {
             color: var(--text-muted);
+            font-size: 1.1rem;
             margin-top: 0.5rem;
+            font-weight: 300;
         }
+
         .container {
             max-width: 900px;
             margin: 0 auto 5rem auto;
             padding: 0 2rem;
         }
+
         .section-title {
-            font-size: 1.5rem;
-            border-bottom: 1px solid #334155;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 0.5rem;
             margin-bottom: 2rem;
         }
+
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
         }
+
+        /* Frosted Glass Card Design */
         .project-card {
             background-color: var(--card-bg);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
         }
+
         .project-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
+            transform: translateY(-6px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
         }
+
         .project-card h3 {
             margin: 0 0 0.75rem 0;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
             text-transform: capitalize;
         }
+
         .project-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin: 0 0 1.5rem 0;
+            line-height: 1.6;
+            margin: 0 0 2rem 0;
             flex-grow: 1;
         }
+
         .btn {
             display: inline-block;
-            background-color: transparent;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(139, 92, 246, 0.1));
             color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.85rem;
             text-align: center;
             transition: all 0.2s ease;
         }
+
         .btn:hover {
-            background-color: var(--accent);
-            color: #0f172a;
+            background: var(--accent);
+            color: #030712;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+            transform: scale(1.02);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Jay's Ecosystem</h1>
-        <p>Data Pipelines, SQL Analytics, & Algorithms — Automated directly from GitHub.</p>
+        <h1>Jay's Development Environment</h1>
+        <p>Data Pipelines, SQL Metrics & Algorithmic Optimizations.</p>
     </header>
 
     <div class="container">
-        <h2 class="section-title">Live Repositories</h2>
+        <h2 class="section-title">Production Repositories</h2>
         <div class="project-grid" id="github-projects">
             </div>
     </div>
 
     <script>
-        // Change this if your GitHub username is spelled exactly differently
         const username = "Jay97015"; 
 
         async function fetchRepos() {
@@ -120,18 +157,18 @@
                 const container = document.getElementById('github-projects');
                 
                 container.innerHTML = repos
-                    .filter(repo => !repo.fork && repo.name !== `${username}.github.io`) // Hide the website repo itself
+                    .filter(repo => !repo.fork && repo.name !== `${username}.github.io`)
                     .map(repo => `
                         <div class="project-card">
                             <div>
                                 <h3>📂 ${repo.name.replace(/-/g, ' ')}</h3>
-                                <p>${repo.description || "No description provided yet. Add a description on GitHub to display it here!"}</p>
+                                <p>${repo.description || "No description configured yet. Set a repository description on GitHub to auto-sync."}</p>
                             </div>
-                            <a href="${repo.html_url}" target="_blank" class="btn">Explore Code →</a>
+                            <a href="${repo.html_url}" target="_blank" class="btn">Examine System Code →</a>
                         </div>
                     `).join('');
             } catch (error) {
-                document.getElementById('github-projects').innerHTML = "<p>Error loading repositories.</p>";
+                document.getElementById('github-projects').innerHTML = "<p style='color:red;'>Failed to compile pipeline cards.</p>";
             }
         }
         fetchRepos();
