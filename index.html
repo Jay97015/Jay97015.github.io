@@ -3,90 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jay's Data Portfolio</title>
+    <title>Jay | Engineering Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            background-color: #f4f6f9;
-            color: #333;
         }
         header {
-            background: #1f2937;
-            color: #ffffff;
-            padding: 2rem 1rem;
-            text-align: center;
+            max-width: 900px;
+            margin: 4rem auto 2rem auto;
+            padding: 0 2rem;
         }
-        header h1 { margin: 0; font-size: 2.5rem; }
-        header p { margin: 0.5rem 0 0; font-size: 1.1rem; color: #9ca3af; }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        header p {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
         .container {
             max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 0 auto 5rem auto;
+            padding: 0 2rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
         .project-card {
-            background: #ffffff;
-            border-radius: 8px;
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 12px;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-left: 5px solid #3b82f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
-        .project-card h2 { margin-top: 0; color: #1e3a8a; }
-        .tag {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-right: 0.5rem;
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+        .project-card h3 {
+            margin: 0 0 0.75rem 0;
+            font-size: 1.2rem;
+            text-transform: capitalize;
+        }
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0 0 1.5rem 0;
+            flex-grow: 1;
         }
         .btn {
             display: inline-block;
-            background: #3b82f6;
-            color: #fff;
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
             padding: 0.5rem 1rem;
-            text-align: center;
-            border-radius: 4px;
+            border-radius: 6px;
             text-decoration: none;
-            margin-top: 1rem;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-align: center;
+            transition: all 0.2s ease;
         }
-        .btn:hover { background: #2563eb; }
+        .btn:hover {
+            background-color: var(--accent);
+            color: #0f172a;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Jay's Data & Algorithm Portfolio</h1>
-        <p>Data Professional | Python | Data Structures & Algorithms</p>
+        <h1>Jay's Ecosystem</h1>
+        <p>Data Pipelines, SQL Analytics, & Algorithms — Automated directly from GitHub.</p>
     </header>
 
     <div class="container">
-        
-        <div class="project-card">
-            <h2>🎬 OTT Entertainment Data Cleaning</h2>
-            <span class="tag">Python</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">Data Engineering</span>
-            <p>Simulated and resolved production-level data integrity bugs—such as duplicate tracking records, fragmented string formatting, and corrupt timestamps—making raw stream data dashboard-ready.</p>
-            <a href="https://github.com/Jay97015/ott-data-cleaning" target="_blank" class="btn">View Code on GitHub</a>
-        </div>
-
-        <div class="project-card">
-            <h2>⚡ Efficient Data Processing via Binary Search</h2>
-            <span class="tag">DSA</span>
-            <span class="tag">Algorithms</span>
-            <span class="tag">Optimization</span>
-            <p>Implemented a highly optimal divide-and-conquer lookup system in Python. Reduced chronological search spaces down from O(N) linear operations to O(log N) operations for rapid query performance on scaled index tables.</p>
-            <a href="https://github.com/Jay97015/ott-data-cleaning/blob/main/binary_search.py" target="_blank" class="btn">View Code on GitHub</a>
-        </div>
-
+        <h2 class="section-title">Live Repositories</h2>
+        <div class="project-grid" id="github-projects">
+            </div>
     </div>
 
+    <script>
+        // Change this if your GitHub username is spelled exactly differently
+        const username = "Jay97015"; 
+
+        async function fetchRepos() {
+            try {
+                const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
+                const repos = await response.json();
+                const container = document.getElementById('github-projects');
+                
+                container.innerHTML = repos
+                    .filter(repo => !repo.fork && repo.name !== `${username}.github.io`) // Hide the website repo itself
+                    .map(repo => `
+                        <div class="project-card">
+                            <div>
+                                <h3>📂 ${repo.name.replace(/-/g, ' ')}</h3>
+                                <p>${repo.description || "No description provided yet. Add a description on GitHub to display it here!"}</p>
+                            </div>
+                            <a href="${repo.html_url}" target="_blank" class="btn">Explore Code →</a>
+                        </div>
+                    `).join('');
+            } catch (error) {
+                document.getElementById('github-projects').innerHTML = "<p>Error loading repositories.</p>";
+            }
+        }
+        fetchRepos();
+    </script>
 </body>
 </html>
