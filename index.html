@@ -12,7 +12,7 @@
             --border-muted: #1E293B;    /* Clean architectural structural divider */
             --border-active: #38BDF8;   /* Cyber cyan laser accent */
             
-            /* Strict hierarchy font colors (No single-color text blocks) */
+            /* Strict hierarchy font colors */
             --text-title: #FFFFFF;      /* Absolute pure contrast */
             --text-body: #94A3B8;       /* Subtle slate for paragraphs */
             --text-muted: #64748B;      /* Deeper contrast for technical timestamps */
@@ -30,7 +30,6 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            /* Subtle technical grid line texture */
             background-image: 
                 linear-gradient(var(--border-muted) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border-muted) 1px, transparent 1px);
@@ -66,9 +65,25 @@
             letter-spacing: -0.02em;
         }
 
-        .nav-status {
+        /* Live Clock Container */
+        .nav-metrics {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
+        }
+
+        .live-timer {
+            color: var(--text-title);
+            background: #161F38;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-status {
             color: var(--accent-green);
             display: flex;
             align-items: center;
@@ -84,13 +99,17 @@
         }
 
         /* Hero Frame Workspace */
-        .hero {
+        .hero-section {
             max-width: 1100px;
             margin: 0 auto;
             padding: 10rem 2rem 6rem 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
-        .hero h1 {
+        .hero-text h1 {
             font-size: 3.5rem;
             font-weight: 700;
             color: var(--text-title);
@@ -98,11 +117,60 @@
             letter-spacing: -0.04em;
         }
 
-        .hero p {
+        .hero-text p {
             font-size: 1.2rem;
             color: var(--text-body);
             max-width: 700px;
             margin: 0 0 2.5rem 0;
+        }
+
+        /* Interactive Dashboard Calendar Card */
+        .dashboard-calendar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-muted);
+            border-radius: 14px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .calendar-header {
+            color: var(--border-active);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-muted);
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.4rem;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+
+        .day-label {
+            color: var(--text-muted);
+            font-weight: 600;
+            padding-bottom: 0.2rem;
+        }
+
+        .calendar-day {
+            color: var(--text-body);
+            padding: 0.4rem 0;
+            border-radius: 4px;
+        }
+
+        .calendar-day.today {
+            background: var(--border-active);
+            color: var(--bg-main);
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
         }
 
         /* Skill Matrix Capsule Design */
@@ -174,7 +242,7 @@
             line-height: 1.7;
         }
 
-        /* Wide Production Rows instead of beginner boxes */
+        /* Wide Production Rows */
         .repo-list {
             display: flex;
             flex-direction: column;
@@ -233,14 +301,18 @@
         }
 
         /* Responsive Breakdowns */
+        @media (max-width: 900px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding-top: 8rem;
+            }
+        }
         @media (max-width: 768px) {
             .repo-item {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1.5rem;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
             }
         }
     </style>
@@ -250,24 +322,42 @@
     <nav>
         <div class="nav-container">
             <div class="nav-logo">SYSTEMS://JAYS_ECOSYSTEM</div>
-            <div class="nav-status">
-                <div class="status-dot"></div> PIPELINES_ACTIVE
+            <div class="nav-metrics">
+                <div class="live-timer" id="clock-display">00:00:00 UTC</div>
+                <div class="nav-status">
+                    <div class="status-dot"></div> PIPELINES_ACTIVE
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Jay's Ecosystem</h1>
-        <p>
-            I engineer clean data pipelines and strong backend structures. I focus on taking messy, 
-            real-world data streams, scrubbing away errors and duplicates, and writing highly optimized 
-            SQL algorithms to keep enterprise metrics running fast and accurately.
-        </p>
-        <div class="skill-matrix">
-            <span class="skill-tag">Data Architecture</span>
-            <span class="skill-tag">Python (OOP & DSA)</span>
-            <span class="skill-tag">Advanced SQL (CTEs / Windows)</span>
-            <span class="skill-tag">Memory-Layer Caching</span>
+    <header class="hero-section">
+        <div class="hero-text">
+            <h1>Jay's Ecosystem</h1>
+            <p>
+                I engineer clean data pipelines and strong backend structures. I focus on taking messy, 
+                real-world data streams, scrubbing away errors and duplicates, and writing highly optimized 
+                SQL algorithms to keep enterprise metrics running fast and accurately.
+            </p>
+            <div class="skill-matrix">
+                <span class="skill-tag">Data Architecture</span>
+                <span class="skill-tag">Python (OOP & DSA)</span>
+                <span class="skill-tag">Advanced SQL</span>
+                <span class="skill-tag">Memory-Layer Caching</span>
+                <span calss="skill-tag">Power Bi</span>
+            </div>
+        </div>
+
+        <div class="dashboard-calendar">
+            <div class="calendar-header">
+                <span id="calendar-month-year">MONTH 202X</span>
+                <span style="color: var(--text-muted);">SYS_REFRESH</span>
+            </div>
+            <div class="calendar-grid" id="calendar-days-container">
+                <div class="day-label">SU</div><div class="day-label">MO</div><div class="day-label">TU</div>
+                <div class="day-label">WE</div><div class="day-label">TH</div><div class="day-label">FR</div>
+                <div class="day-label">SA</div>
+                </div>
         </div>
     </header>
 
@@ -300,8 +390,56 @@
     </div>
 
     <script>
-        const username = "Jay97015"; 
+        // 1. LIVE COMPILER RUNTIME CLOCK LOGIC
+        function updateSystemClock() {
+            const now = new Date();
+            let hours = String(now.getHours()).padStart(2, '0');
+            let minutes = String(now.getMinutes()).padStart(2, '0');
+            let seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('clock-display').innerText = `${hours}:${minutes}:${seconds} LOC`;
+        }
+        setInterval(updateSystemClock, 1000);
+        updateSystemClock(); // Instant trigger on boot
 
+        // 2. LOGICAL CALENDAR MATRIX GRID ENGINE
+        function buildDashboardCalendar() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const todayDate = now.getDate();
+
+            const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", 
+                                "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+            
+            document.getElementById('calendar-month-year').innerText = `${monthNames[month]} ${year}`;
+
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const totalDays = new Date(year, month + 1, 0).getDate();
+            const container = document.getElementById('calendar-days-container');
+
+            // Insert empty space padding variables to align days layout correctly
+            for (let i = 0; i < firstDayIndex; i++) {
+                const emptyCell = document.createElement('div');
+                container.appendChild(emptyCell);
+            }
+
+            // Loop and render days, instantly identifying current user timestamp date
+            for (let day = 1; day <= totalDays; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.classList.add('calendar-day');
+                dayCell.innerText = day;
+
+                if (day === todayDate) {
+                    dayCell.classList.add('today'); // Highlights current active day in structural laser blue
+                }
+                container.appendChild(dayCell);
+            }
+        }
+        buildDashboardCalendar();
+
+        // 3. GITHUB API ARCHITECTURE INGESTION
+        const username = "Jay97015"; 
         async function fetchRepos() {
             try {
                 const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
