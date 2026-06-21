@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jay | Systems & Data Architecture</title>
+    <!-- Ultra-premium tech industry typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -178,6 +179,7 @@
             display: flex;
             gap: 0.75rem;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .skill-tag {
@@ -284,12 +286,9 @@
 
         .repo-action-btn {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--border-active);
             border: 1px solid var(--border-active);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
+            color: var(--border-active);
+            background: transparent;
             text-decoration: none;
             white-space: nowrap;
             transition: all 0.2s ease;
@@ -319,6 +318,7 @@
 </head>
 <body>
 
+    <!-- STICKY TOP NAVIGATION BAR WITH REAL-TIME CLOCK -->
     <nav>
         <div class="nav-container">
             <div class="nav-logo">SYSTEMS://JAYS_ECOSYSTEM</div>
@@ -331,6 +331,7 @@
         </div>
     </nav>
 
+    <!-- HEADER BLOCK WITH INTEGRATED LIVE CALENDAR -->
     <header class="hero-section">
         <div class="hero-text">
             <h1>Jay's Ecosystem</h1>
@@ -344,25 +345,33 @@
                 <span class="skill-tag">Python (OOP & DSA)</span>
                 <span class="skill-tag">Advanced SQL</span>
                 <span class="skill-tag">Memory-Layer Caching</span>
-                <span calss="skill-tag">Power Bi</span>
+                <span class="skill-tag">Power BI</span>
+                
+                <!-- Premium Connected CV Download Button -->
+                <a href="your_resume.pdf" target="_blank" class="repo-action-btn" style="padding: 0.4rem 0.9rem; font-size: 0.8rem; border-radius: 6px; margin-left: 0.5rem;">Download CV →</a>
             </div>
         </div>
 
+        <!-- DYNAMIC SYSTEM CALENDAR WIDGET -->
         <div class="dashboard-calendar">
             <div class="calendar-header">
                 <span id="calendar-month-year">MONTH 202X</span>
                 <span style="color: var(--text-muted);">SYS_REFRESH</span>
             </div>
             <div class="calendar-grid" id="calendar-days-container">
+                <!-- Row 1: Fixed Headers -->
                 <div class="day-label">SU</div><div class="day-label">MO</div><div class="day-label">TU</div>
                 <div class="day-label">WE</div><div class="day-label">TH</div><div class="day-label">FR</div>
                 <div class="day-label">SA</div>
-                </div>
+                <!-- Dynamic calendar numbers inject here seamlessly -->
+            </div>
         </div>
     </header>
 
+    <!-- WRAPPER FOR LONG SCROLLABLE INTERFACE -->
     <div class="wrapper">
 
+        <!-- SECTION 1: METHODOLOGIES -->
         <section class="section-block">
             <div class="section-label">01 // Architectural Workflow</div>
             <div class="pipeline-grid">
@@ -381,14 +390,17 @@
             </div>
         </section>
 
+        <!-- SECTION 2: LIVE CODE PIPELINES -->
         <section class="section-block">
             <div class="section-label">02 // Monitored Production Repositories</div>
             <div class="repo-list" id="github-projects">
-                </div>
+                <!-- API pulls long-form wide items down seamlessly here -->
+            </div>
         </section>
 
     </div>
 
+    <!-- SYSTEM TIME, DATE, & API LOGIC ENGINE -->
     <script>
         // 1. LIVE COMPILER RUNTIME CLOCK LOGIC
         function updateSystemClock() {
@@ -451,10 +463,10 @@
                     .map(repo => `
                         <div class="repo-item">
                             <div class="repo-details">
-                                <h3>📂 ${repo.name.replace(/-/g, ' ')}</h3>
+                                <h3 style="font-family: 'JetBrains Mono', monospace;">📂 ${repo.name.replace(/-/g, ' ')}</h3>
                                 <p>${repo.description || "Active infrastructure logs initialized. Configure your repository text overview metadata fields via your GitHub settings interface dashboard to auto-sync runtime context notes."}</p>
                             </div>
-                            <a href="${repo.html_url}" target="_blank" class="repo-action-btn">Inspect Architecture →</a>
+                            <a href="${repo.html_url}" target="_blank" class="repo-action-btn" style="padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.85rem;">Inspect Architecture →</a>
                         </div>
                     `).join('');
             } catch (error) {
